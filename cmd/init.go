@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"os"
 	"path/filepath"
 
 	"github.com/alomia/fastman-cli/internal/fileutil"
@@ -11,35 +10,30 @@ import (
 
 // initCmd represents the init command
 var initCmd = &cobra.Command{
-	Use:   "init",
-	Short: "init [targetFolder]",
+	Use:   "init [directory]",
+	Short: "Create a configuration file",
 	Long: `Initialize the project by creating a configuration file in the specified directory.
-If [targetFolder] is not provided, the current directory will be used.`,
-	Args: cobra.MaximumNArgs(1),
+If [directory] is not provided, the current directory will be used.
+	
+Examples:
+	fastman init
+	fastman init directory-name`,
 	Run: func(cmd *cobra.Command, args []string) {
 		targetFolder := "."
 		if len(args) > 0 {
 			targetFolder = args[0]
 		}
 
-		currentDir, err := os.Getwd()
-		if err != nil {
-			fmt.Printf("Error getting the current directory: %v\n", err)
-			return
-		}
+		configFilePath := filepath.Join(app.currentDir, targetFolder)
 
-		if !fileutil.DirectoryExists(currentDir, targetFolder) {
-			err = fileutil.CreateDirectory(currentDir, targetFolder)
-			if err != nil {
+		if !fileutil.DirectoryExists(app.currentDir, targetFolder) {
+			if err := fileutil.CreateDirectory(app.currentDir, targetFolder); err != nil {
 				fmt.Printf("Error creating the target directory: %v\n", err)
 				return
 			}
 		}
 
-		configFileName := "fastman.yaml"
-		configFilePath := filepath.Join(currentDir, targetFolder, configFileName)
-
-		err = fileutil.CreateFile(configFilePath)
+		err := fileutil.CreateFile(configFilePath, app.configFile)
 		if err != nil {
 			fmt.Printf("Error creating the configuration file: %v\n", err)
 			return
