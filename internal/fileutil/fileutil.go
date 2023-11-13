@@ -6,12 +6,18 @@ import (
 	"path/filepath"
 )
 
-func CreateFile(fileName string) error {
-	file, err := os.Create(fileName)
+func CreateFile(basePath, fileName string, content ...string) error {
+	filePath := filepath.Join(basePath, fileName)
+	file, err := os.Create(filePath)
 	if err != nil {
 		return fmt.Errorf("failed to create the file %s: %w", fileName, err)
 	}
 	defer file.Close()
+
+	_, err = file.WriteString(content[0])
+	if err != nil {
+		return fmt.Errorf("failed to write to the file %s: %w", fileName, err)
+	}
 	return nil
 }
 
@@ -22,8 +28,6 @@ func CreateDirectory(basePath, directoryName string) error {
 	}
 	return nil
 }
-
-func WriteToFile() {}
 
 func FileExists(basePath, fileName string) bool {
 	filePath := filepath.Join(basePath, fileName)
