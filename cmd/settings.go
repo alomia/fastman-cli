@@ -15,7 +15,7 @@ var app *Application
 
 func init() {
 	app = &Application{
-		version:    "0.1.0",
+		version:    "0.1.1",
 		configFile: "fastman.yaml",
 		currentDir: setCurrentDir(),
 	}

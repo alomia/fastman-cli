@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 
 	"github.com/alomia/fastman-cli/internal/fileutil"
-	"github.com/alomia/fastman-cli/internal/projectstructure"
+	"github.com/alomia/fastman-cli/internal/project"
 	"github.com/spf13/cobra"
 )
 
@@ -37,12 +37,11 @@ to quickly create a Cobra application.`,
 				}
 			}
 
-			fastapi := projectstructure.FastAPI{
-				ConfigFile: app.configFile,
-			}
+			fastapi := project.FastAPI{}
 
 			if err := fastapi.Create(fullPathDir); err != nil {
-				fmt.Printf("Error when creating FastAPI project %v\n", err)
+				fmt.Printf("error creating FastAPI project structure: %v\n", err)
+				return
 			}
 
 			fmt.Println("Project structure created successfully.")
