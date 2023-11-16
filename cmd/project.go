@@ -13,14 +13,14 @@ var fastapiVar bool
 
 // projectCmd represents the project command
 var projectCmd = &cobra.Command{
-	Use:   "project",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Use:   "project [arguments] [options]",
+	Short: "Manage projects under the 'create' command",
+	Long: `Project is a subcommand of 'create' for managing projects with various options and configurations.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+For example:
+	To create a new project:
+		fastman create project --fastapi
+		fastman create project planner --fastapi`,
 	Run: func(cmd *cobra.Command, args []string) {
 		targetFolder := "."
 		if len(args) > 0 {
@@ -40,7 +40,7 @@ to quickly create a Cobra application.`,
 			fastapi := project.FastAPI{}
 
 			if err := fastapi.Create(fullPathDir); err != nil {
-				fmt.Printf("error creating FastAPI project structure: %v\n", err)
+				fmt.Printf("Error creating FastAPI project structure: %v\n", err)
 				return
 			}
 

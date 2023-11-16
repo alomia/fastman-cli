@@ -9,13 +9,22 @@ import (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "fastman",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
+	Short: "FastMan CLI: Streamlining Project Initiation and Automation",
+	Long: `FastMan is a command-line tool designed to streamline project initiation and automation.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+Key Features:
+	- Rapid Project Structure Generation: Efficiently create a project's structure, eliminating the need for manual configurations, repetitive directories, and lengthy commands.
+	- Command Automation with Aliases: Expedite the execution of common tasks by automating frequent commands through customizable aliases.
+	
+Why FastMan?
+	FastMan arises from the need to expedite the process of project initiation and management.
+Initial setup and repetitive command execution can consume time and energy.
+FastMan is crafted to eliminate these barriers, allowing you to focus on what truly matters: your project.
+	
+Usage Examples:
+	$ fastman create project --fastapi
+	
+Discover how FastMan can enhance your workflow and make project management more efficient.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
