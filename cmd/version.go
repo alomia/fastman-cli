@@ -18,7 +18,7 @@ Examples:
   fastman version`,
 	Args: cobra.MaximumNArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("fastman version %s %s/%s\n", app.version, runtime.GOOS, runtime.GOARCH)
+		fmt.Printf("fastman version %s %s/%s\n", version, runtime.GOOS, runtime.GOARCH)
 	},
 }
 

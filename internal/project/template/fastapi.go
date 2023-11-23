@@ -1,5 +1,6 @@
 package template
 
 var FastAPI = TemplateMap{
-	"main.py": main,
+	"main.py":      main,
+	"fastman.yaml": cfgFileFastAPI,
 }

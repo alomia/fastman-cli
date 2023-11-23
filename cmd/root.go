@@ -1,15 +1,23 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
+
+const version = "0.1.0"
+const cfgFile = "fastman.yaml"
+
+var currentDir string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "fastman",
-	Short: "FastMan CLI: Streamlining Project Initiation and Automation",
+	Use:     "fastman",
+	Version: version,
+	Short:   "FastMan CLI: Streamlining Project Initiation and Automation",
 	Long: `FastMan is a command-line tool designed to streamline project initiation and automation.
 
 Key Features:
@@ -40,5 +48,27 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	cobra.OnInitialize(initConfig)
+
+	setCurrentDir()
+}
+
+func initConfig() {
+	viper.AddConfigPath(currentDir)
+	viper.SetConfigType("yaml")
+	viper.SetConfigName("fastman")
+
+	if err := viper.ReadInConfig(); err != nil {
+		fmt.Printf("Error config file: The file %s does not exist in the directory\n", cfgFile)
+		return
+	}
+}
+
+func setCurrentDir() {
+	var err error
+
+	currentDir, err = os.Getwd()
+	if err != nil {
+		fmt.Println(err)
+	}
 }

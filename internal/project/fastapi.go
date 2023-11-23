@@ -10,7 +10,7 @@ func (f FastAPI) Create(basePath string) error {
 	fastapi := project{
 		template: template.FastAPI,
 		structure: projectStructure{
-			".":        {"main.py", "requirements.txt"},
+			".":        {"main.py", "requirements.txt", "fastman.yaml"},
 			"database": {"__init__.py", "connection.py"},
 			"routes":   {"__init__.py", "events.py", "users.py"},
 			"models":   {"__init__.py", "events.py", "users.py"},
